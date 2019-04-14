@@ -10,7 +10,10 @@ export async function paginatedList(
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 10
 
   try {
-    const { docs, ...pagination } = await Post.paginate({}, { page, limit })
+    const { docs, ...pagination } = await Post.paginate(
+      {},
+      { page, limit, sort: '-updatedAt' }
+    )
     const posts = docs.map(post => post.toJSON())
 
     res.status(200).json({ docs: posts, pagination })
