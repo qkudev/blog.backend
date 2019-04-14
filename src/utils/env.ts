@@ -13,6 +13,8 @@ if (error || !parsed) {
 
 export const port = parsed.PORT || '5000'
 
+export const CORS = !!parsed.CORS || false
+
 export const apiKey = parsed.API_KEY || ''
 
 const mongoUri = `mongodb://${parsed.MONGO_HOST ||
