@@ -1,6 +1,7 @@
 import server from './server'
 import { port } from './utils/env'
 
+// mongoose configuration
 import './utils/mongo'
 
 server.listen(port, () => {
