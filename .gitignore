@@ -70,3 +70,6 @@ typings/
 # build output
 build
 dist
+
+# mogno dir
+mongo
