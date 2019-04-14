@@ -10,6 +10,10 @@ export default function(
     return next()
   }
   switch (error.name) {
+    case 'UnauthorizedError': {
+      res.status(401).json({ status: 401, message: 'Unauthorized' })
+      return next()
+    }
     case 'CastError':
     case 'NotFoundError': {
       res.status(404).json({ status: 404, message: 'NotFound' })

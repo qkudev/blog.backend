@@ -11,6 +11,8 @@ server.use(express.urlencoded({ extended: true }))
 if (env.CORS) {
   server.use(cors())
 }
+
+server.use(middlewares.authorization)
 server.use('/api/v1', middlewares.router)
 server.use(middlewares.errorHandler)
 
