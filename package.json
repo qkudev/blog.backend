@@ -1,0 +1,72 @@
+{
+  "name": "blog.backend",
+  "version": "0.1.0",
+  "description": "Blog backend",
+  "homepage": "https://github.com/qkudev/blog.backend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qkudev/blog.backend"
+  },
+  "author": {
+    "url": "https://qkudev.me",
+    "name": "qkudev",
+    "email": "qkud.ev@gmail.com"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "mongodb",
+    "blog",
+    "JSON API"
+  ],
+  "readme": "README.md",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.16.1",
+    "@types/mongoose": "^5.3.26",
+    "@types/node": "^11.13.4",
+    "nodemon": "^1.18.11",
+    "prettier": "^1.17.0",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.15.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.4.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "./src"
+    ],
+    "exec": "ts-node src/index.ts",
+    "ext": "ts, json"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "semi": false,
+    "singleQuote": true,
+    "htmlWhitespaceSensitivity": "strict",
+    "printWidth": 80
+  }
+}
