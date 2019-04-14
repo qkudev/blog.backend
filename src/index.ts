@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { env } from './utils'
+import './utils/mongo'
 
 const { port } = env
 const server = express()
