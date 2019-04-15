@@ -70,5 +70,16 @@
     "singleQuote": true,
     "htmlWhitespaceSensitivity": "strict",
     "printWidth": 80
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

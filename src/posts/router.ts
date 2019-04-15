@@ -12,7 +12,7 @@ export async function paginatedList(
   try {
     const { docs, ...pagination } = await Post.paginate(
       {},
-      { page, limit, sort: '-updatedAt' }
+      { page, limit, sort: '-createdAt' }
     )
     const posts = docs.map(post => post.toJSON())
 
