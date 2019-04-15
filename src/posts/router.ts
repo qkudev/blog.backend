@@ -80,7 +80,7 @@ export async function removeById(
 ) {
   const { postId } = req.params
   try {
-    await Post.findByIdAndDelete()
+    await Post.findByIdAndDelete(postId)
     res.status(204).json({ id: postId })
     return next()
   } catch (e) {
