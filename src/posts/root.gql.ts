@@ -1,5 +1,22 @@
 import { model as Post } from './model'
 
+interface Pagination<T> {
+  docs: T[]
+  page: number
+  limit: number
+  total: number
+  pages: number
+}
+
+interface IPostJSON {
+  _id: string
+  body: string
+  createdAt: string
+  updatedAt: string
+}
+
+type PaginatedPosts = Pagination<IPostJSON>
+
 export const resolvers = {
   blogTitle: () => 'SHIT',
   postById: async function({ id }: ByID) {
@@ -13,20 +30,23 @@ export const resolvers = {
       return null
     }
   },
-  paginatedPosts: async function({ pagination }: PaginationInput) {
-    const pageNum = pagination.page || 1
-    const pageLimit = pagination.limit || 10
+  posts: async function({
+    pagination
+  }: PaginationInput): Promise<PaginatedPosts | null> {
+    const page = pagination.page || 1
+    const limit = pagination.limit || 10
 
     try {
-      const result = await Post.paginate(
+      const { docs: posts, pages, total } = await Post.paginate(
         {},
         {
-          page: pageNum,
-          limit: pageLimit,
+          page: page,
+          limit: limit,
           sort: '-createdAt'
         }
       )
-      return result.docs.map(post => post.toJSON())
+      const docs = posts.map(post => post.toJSON())
+      return { docs, page, limit, total, pages: pages || 1 }
     } catch (e) {
       return null
     }

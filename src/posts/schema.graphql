@@ -7,7 +7,7 @@ type Post {
 
 type Query {
   blogTitle: String!
-  paginatedPosts(pagination: PaginationInput): [Post]
+  posts(pagination: PaginationInput): PaginatedPosts
   postById(id: ID!): Post
 }
 
@@ -20,4 +20,19 @@ type Mutation {
 input PaginationInput {
   page: Int = 1
   limit: Int = 10
+}
+
+interface Pagination {
+  page: Int!
+  limit: Int!
+  total: Int!
+  pages: Int!
+}
+
+type PaginatedPosts implements Pagination {
+  docs: [Post]
+  page: Int!
+  limit: Int!
+  total: Int!
+  pages: Int!
 }

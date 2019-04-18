@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, Router } from 'express'
 import { model as Post } from './model'
+import { authorization } from '../middlewares'
 
 export async function paginatedList(
   req: Request,

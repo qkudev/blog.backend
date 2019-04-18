@@ -16,9 +16,7 @@ if (env.CORS) {
   app.use(cors())
 }
 
-app.use(middlewares.authorization)
 app.use('/api/v1', middlewares.router)
-app.use(middlewares.errorHandler)
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
@@ -37,5 +35,7 @@ server.applyMiddleware({
   app,
   path: '/api/v1/graphql'
 })
+
+app.use(middlewares.errorHandler)
 
 export default app
