@@ -5,7 +5,8 @@
     ],
     "jsRules": {},
     "rules": {
-        "space-before-function-paren": false
+        "space-before-function-paren": false,
+        "no-return-await": false
     },
     "rulesDirectory": []
 }

@@ -1,3 +1,5 @@
+/// <reference path="typings.d.ts" />
+
 import server from './server'
 import { port } from './utils/env'
 

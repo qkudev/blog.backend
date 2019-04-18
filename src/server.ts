@@ -2,18 +2,40 @@ import express from 'express'
 import cors from 'cors'
 import { env } from './utils'
 import * as middlewares from './middlewares'
+import { ApolloServer } from 'apollo-server-express'
+import { makeExecutableSchema } from 'graphql-tools'
+import * as Posts from './posts'
+import * as Users from './users'
 
-const server = express()
+const app = express()
 
-server.use(express.json())
-server.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 if (env.CORS) {
-  server.use(cors())
+  app.use(cors())
 }
 
-server.use(middlewares.authorization)
-server.use('/api/v1', middlewares.router)
-server.use(middlewares.errorHandler)
+app.use(middlewares.authorization)
+app.use('/api/v1', middlewares.router)
+app.use(middlewares.errorHandler)
 
-export default server
+const server = new ApolloServer({
+  schema: makeExecutableSchema({
+    typeDefs: [Posts.schema, Users.schema]
+  }),
+  rootValue: {
+    ...Posts.resolvers,
+    ...Posts.mutations,
+    ...Users.resolvers
+  },
+  playground: true,
+  introspection: true
+})
+
+server.applyMiddleware({
+  app,
+  path: '/api/v1/graphql'
+})
+
+export default app

@@ -1,0 +1,23 @@
+type Post {
+  _id: ID!
+  body: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Query {
+  blogTitle: String!
+  paginatedPosts(pagination: PaginationInput): [Post]
+  postById(id: ID!): Post
+}
+
+type Mutation {
+  createPost(body: String!): Post
+  updatePost(id: ID!, body: String!): Post
+  deletePost(id: ID!): Boolean
+}
+
+input PaginationInput {
+  page: Int = 1
+  limit: Int = 10
+}
