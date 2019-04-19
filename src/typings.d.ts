@@ -10,3 +10,7 @@ declare type PaginationInput = {
 declare interface ByID {
   id: string
 }
+
+declare interface IContext {
+  authorized: boolean
+}

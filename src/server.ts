@@ -27,6 +27,12 @@ const server = new ApolloServer({
     ...Posts.mutations,
     ...Users.resolvers
   },
+  context: ({ req, res }): IContext => {
+    let authorized = req.headers.authorization === `Token ${env.apiKey}`
+    return {
+      authorized
+    }
+  },
   playground: true,
   introspection: true
 })

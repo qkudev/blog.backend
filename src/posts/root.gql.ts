@@ -62,7 +62,10 @@ interface UpdateProps extends ByID {
 }
 
 export const mutations = {
-  createPost: async function({ body }: CreateProps) {
+  createPost: async function({ body }: CreateProps, context: IContext) {
+    if (!context.authorized) {
+      throw new Error('NotAuthorized')
+    }
     try {
       const post = await Post.create({ body })
       if (post) {
@@ -73,7 +76,10 @@ export const mutations = {
       return null
     }
   },
-  updatePost: async ({ id, body }: UpdateProps) => {
+  updatePost: async ({ id, body }: UpdateProps, context: IContext) => {
+    if (!context.authorized) {
+      throw new Error('NotAuthorized')
+    }
     const post = await Post.findById(id)
     if (post) {
       post.body = body
@@ -81,7 +87,10 @@ export const mutations = {
     }
     return post
   },
-  deletePost: async ({ id }: ByID) => {
+  deletePost: async ({ id }: ByID, context: IContext) => {
+    if (!context.authorized) {
+      throw new Error('NotAuthorized')
+    }
     return !!(await Post.findByIdAndDelete(id))
   }
 }
